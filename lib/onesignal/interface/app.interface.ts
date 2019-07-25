@@ -3,7 +3,7 @@ import { Paginated } from '../../common';
 /**
  * OneSignal App
  */
-export interface App {
+export interface IApp {
   id: string;
   name: string;
   gcm_key: string | null;
@@ -32,6 +32,6 @@ export interface App {
   additional_data_is_root_payload: false;
 }
 
-export interface Devices extends Paginated {
-  apps: App[];
+export interface IDevices extends Paginated {
+  apps: IApp[];
 }

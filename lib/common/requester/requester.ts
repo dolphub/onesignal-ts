@@ -1,8 +1,6 @@
 import * as request from 'request';
-import * as url from 'url';
-import { API_ROOT } from '../constants/api.constants';
-import * as querystring from 'querystring';
 import * as urlJoin from 'url-join';
+import { API_ROOT } from '../constants/api.constants';
 
 interface BodyOptions {
   [key: string]: any;
@@ -20,15 +18,15 @@ const getHeaders = apiKey => ({
   Authorization: `Basic ${apiKey}`,
 });
 
-export interface kvstore {
-  [key: string]: string | number | kvstore;
+export interface KVStore {
+  [key: string]: string | number | KVStore;
 }
 
 export interface GenericRequesterOptions {
   method: HttpMethods;
   uri: string;
   apiKey: string;
-  body?: kvstore | string;
+  body?: KVStore | string;
 }
 
 export interface ApiResult<T> {
@@ -44,7 +42,6 @@ export const GenericRequester = (
   return new Promise((resolve, reject) => {
     const headers = getHeaders(options.apiKey);
     const uri = resolveUri(options.uri);
-    console.log(uri);
     request(uri, { headers }, (error, req, body) => {
       if (error) {
         return reject(error);
@@ -54,8 +51,9 @@ export const GenericRequester = (
         if (body) {
           parsed = JSON.parse(body);
         }
-      } catch (e) {}
-
+      } catch (e) {
+        //
+      }
       resolve({
         data: parsed || body,
         request: req,

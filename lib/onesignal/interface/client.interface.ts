@@ -1,5 +1,5 @@
-import { Device, Devices } from './device.interface';
 import { ApiResult } from '../../common';
+import { IDevice, IDevices } from './device.interface';
 
 export interface ClientOptions {
   appId: string;
@@ -9,6 +9,6 @@ export interface ClientOptions {
 
 export interface IClient {
   viewApp: () => Promise<any>;
-  viewDevices: () => Promise<ApiResult<Devices>>;
-  viewDevice: (playerId: string) => Promise<ApiResult<Device>>;
+  viewDevices: () => Promise<ApiResult<IDevices>>;
+  viewDevice: (playerId: string) => Promise<ApiResult<IDevice>>;
 }

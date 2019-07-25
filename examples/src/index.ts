@@ -12,15 +12,15 @@ import { Client } from '../../lib';
     // const app = await client.viewApp();
 
     const devicesResult = await client.viewDevices();
-    console.log(devicesResult.data);
     if (devicesResult.data.players.length > 0) {
       const deviceResult = await client.viewDevice(
         devicesResult.data.players[0].id,
       );
       const { device_os, session_count } = deviceResult.data;
+      // tslint:disable-next-line:no-console
       console.log(device_os, session_count);
     }
   } catch (e) {
-    console.error(e);
+    //
   }
 })();

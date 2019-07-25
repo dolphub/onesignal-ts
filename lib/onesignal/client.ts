@@ -1,10 +1,10 @@
-import { ClientOptions, IClient } from './interface/client.interface';
-import { GenericRequester, ApiResult } from '../common';
-import { API_PATHS } from '../common/constants/api.constants';
 import * as querystring from 'querystring';
 import * as urlJoin from 'url-join';
-import { Device, Devices } from './interface/device.interface';
-import { App } from './interface/app.interface';
+import { ApiResult, GenericRequester } from '../common';
+import { API_PATHS } from '../common/constants/api.constants';
+import { IApp } from './interface/app.interface';
+import { ClientOptions, IClient } from './interface/client.interface';
+import { IDevice, IDevices } from './interface/device.interface';
 
 export class Client implements IClient {
   private readonly appId: string;
@@ -21,17 +21,16 @@ export class Client implements IClient {
     }
   }
 
-  buildUriWithApp(path: string, urlParams: string[] = []) {
+  public buildUriWithApp(path: string, urlParams: string[] = []) {
     const qs = querystring.stringify({ app_id: this.appId });
     return urlJoin(path, ...urlParams, `?${qs}`);
   }
 
-  public async viewApps(): Promise<ApiResult<App[]>> {
+  public async viewApps(): Promise<ApiResult<IApp[]>> {
     if (!this.userAuthKey) {
       throw new Error('Client::viewApps - Missing user auth key');
     }
     const uri = API_PATHS.apps;
-    console.log(uri);
     return GenericRequester({
       uri,
       apiKey: this.userAuthKey,
@@ -39,7 +38,7 @@ export class Client implements IClient {
     });
   }
 
-  public async viewApp(): Promise<ApiResult<App>> {
+  public async viewApp(): Promise<ApiResult<IApp>> {
     if (!this.userAuthKey) {
       throw new Error('Client::viewApp - Missing user auth key');
     }
@@ -51,7 +50,7 @@ export class Client implements IClient {
     });
   }
 
-  public async viewDevices(): Promise<ApiResult<Devices>> {
+  public async viewDevices(): Promise<ApiResult<IDevices>> {
     const uri = this.buildUriWithApp(API_PATHS.devices);
     return GenericRequester({
       uri,
@@ -60,7 +59,7 @@ export class Client implements IClient {
     });
   }
 
-  public async viewDevice(playerId: string): Promise<ApiResult<Device>> {
+  public async viewDevice(playerId: string): Promise<ApiResult<IDevice>> {
     const uri = this.buildUriWithApp(API_PATHS.devices, [playerId]);
     return GenericRequester({
       uri,
