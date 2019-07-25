@@ -1,0 +1,45 @@
+version: 2.1
+
+
+check-branches: &check-branches
+  filters:
+    branches:
+      only: /^((?!(master|development))[\s\S])*$/
+tagged-releases: &tagged-releases
+  filters:
+    branches:
+      ignore: '/.*/'
+    tags:
+      only: '/v.*/'
+jobs:  
+  codecheck:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: Install Yarn
+          command: sudo npm install -g yarn
+      - restore_cache:
+          name: Restore dependencies from cache
+          key: dependency-cache-{{ checksum "./yarn.lock" }}
+      - run:
+          name: Install package and root dependencies
+          command: yarn install
+      - save_cache:
+          name: Saving server dependency cache
+          key: dependency-cache-{{ checksum "./yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Lint all packages
+          command: yarn lint
+      - run:
+          name: Build all packages
+          command: yarn build
+workflows:
+  version: 2
+  generic-workflow:
+    jobs:
+      - codecheck: *check-branches
+            
