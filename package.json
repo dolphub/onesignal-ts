@@ -1,0 +1,26 @@
+{
+  "name": "onesignal-ts",
+  "version": "0.0.0",
+  "description": "OneSignal node SDK written in TypeScript",
+  "main": "index.js",
+  "repository": "git@github.com:dolphub/onesignal-ts.git",
+  "author": "Randy Mikkelsaar",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@types/request": "^2.48.2",
+    "cz-conventional-changelog": "3.0.2",
+    "lerna": "^3.13.4",
+    "tslint": "^5.18.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "request": "^2.88.0",
+    "typescript": "^3.5.3",
+    "url-join": "^4.0.1"
+  }
+}
