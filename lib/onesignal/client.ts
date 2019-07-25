@@ -33,7 +33,7 @@ export class Client implements IClient {
     const uri = API_PATHS.apps;
     return GenericRequester({
       uri,
-      apiKey: this.userAuthKey,
+      authKey: this.userAuthKey,
       method: 'GET',
     });
   }
@@ -45,7 +45,7 @@ export class Client implements IClient {
     const uri = urlJoin(API_PATHS.apps, this.appId);
     return GenericRequester({
       uri,
-      apiKey: this.userAuthKey,
+      authKey: this.userAuthKey,
       method: 'GET',
     });
   }
@@ -54,7 +54,7 @@ export class Client implements IClient {
     const uri = this.buildUriWithApp(API_PATHS.devices);
     return GenericRequester({
       uri,
-      apiKey: this.restApiKey,
+      authKey: this.restApiKey,
       method: 'GET',
     });
   }
@@ -63,7 +63,7 @@ export class Client implements IClient {
     const uri = this.buildUriWithApp(API_PATHS.devices, [playerId]);
     return GenericRequester({
       uri,
-      apiKey: this.restApiKey,
+      authKey: this.restApiKey,
       method: 'GET',
     });
   }

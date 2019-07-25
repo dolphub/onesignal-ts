@@ -13,9 +13,9 @@ export interface RequesterResult {
 
 export type HttpMethods = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-const getHeaders = apiKey => ({
+const getHeaders = authKey => ({
   'Content-Type': 'application/json; charset=utf-8',
-  Authorization: `Basic ${apiKey}`,
+  Authorization: `Basic ${authKey}`,
 });
 
 export interface KVStore {
@@ -25,7 +25,7 @@ export interface KVStore {
 export interface GenericRequesterOptions {
   method: HttpMethods;
   uri: string;
-  apiKey: string;
+  authKey: string;
   body?: KVStore | string;
 }
 
@@ -40,7 +40,7 @@ export const GenericRequester = (
   options: GenericRequesterOptions,
 ): Promise<{ data: any; request: any }> => {
   return new Promise((resolve, reject) => {
-    const headers = getHeaders(options.apiKey);
+    const headers = getHeaders(options.authKey);
     const uri = resolveUri(options.uri);
     request(uri, { headers }, (error, req, body) => {
       if (error) {
