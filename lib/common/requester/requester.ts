@@ -31,6 +31,11 @@ export interface GenericRequesterOptions {
   body?: kvstore | string;
 }
 
+export interface ApiResult<T> {
+  data: T;
+  request: Request;
+}
+
 const resolveUri = uri => urlJoin(API_ROOT, uri);
 
 export const GenericRequester = (
@@ -39,9 +44,7 @@ export const GenericRequester = (
   return new Promise((resolve, reject) => {
     const headers = getHeaders(options.apiKey);
     const uri = resolveUri(options.uri);
-
-    console.log('fetching: ', uri);
-    console.log('headers: ', headers);
+    console.log(uri);
     request(uri, { headers }, (error, req, body) => {
       if (error) {
         return reject(error);
@@ -51,9 +54,8 @@ export const GenericRequester = (
         if (body) {
           parsed = JSON.parse(body);
         }
-      } catch (e) {
-        //
-      }
+      } catch (e) {}
+
       resolve({
         data: parsed || body,
         request: req,
