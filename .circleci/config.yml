@@ -14,7 +14,7 @@ tagged-releases: &tagged-releases
 jobs:  
   codecheck:
     docker:
-      - image: buildpack-deps:trusty
+      - image: circleci/node:dubnium
     steps:
       - checkout
       - run:
