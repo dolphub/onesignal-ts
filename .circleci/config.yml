@@ -41,5 +41,5 @@ workflows:
   version: 2
   generic-workflow:
     jobs:
-      - codecheck: *check-branches
+      - codecheck
             
