@@ -1,0 +1,14 @@
+export enum DeviceTypes {
+  iOS = 0,
+  ANDROID = 1,
+  AMAZON = 2,
+  WINDOWSPHONE_MPNS = 3,
+  CHROME_APPS_EXTENSIONS = 4,
+  CHROME_WEB_PUSH = 5,
+  WINDOWS_WNS = 6,
+  SAFARI = 7,
+  FIREFOX = 8,
+  MACOS = 9,
+  ALEXA = 10,
+  EMAIL = 11,
+}

@@ -1,10 +1,11 @@
 import { KVStore } from '../../common';
 import { Paginated } from '../../common/requester/interfaces/pagination.interface';
+import { DeviceTypes } from '../enums/device-type.enum';
 
 /**
  * OneSignal Device
  */
-export interface IDevice {
+export interface Device {
   id: string;
   identifier: string;
   session_count: number;
@@ -12,7 +13,7 @@ export interface IDevice {
   timezone: number;
   game_version: string | null;
   device_os: string;
-  device_type: number;
+  device_type: DeviceTypes;
   device_model: string;
   ad_id: string | null;
   tags: KVStore;
@@ -28,6 +29,6 @@ export interface IDevice {
   external_user_id: string | null;
 }
 
-export interface IDevices extends Paginated {
-  players: IDevice[];
+export interface Devices extends Paginated {
+  players: Device[];
 }

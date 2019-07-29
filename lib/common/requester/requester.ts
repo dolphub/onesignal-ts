@@ -29,7 +29,7 @@ export interface GenericRequesterOptions {
   body?: KVStore | string;
 }
 
-export interface ApiResult<T> {
+export interface Result<T> {
   data: T;
   request: Request;
 }

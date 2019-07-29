@@ -1,9 +1,7 @@
-import { Paginated } from '../../common';
-
 /**
  * OneSignal App
  */
-export interface IApp {
+export interface App {
   id: string;
   name: string;
   gcm_key: string | null;
@@ -30,8 +28,4 @@ export interface IApp {
   messageable_players: number;
   basic_auth_key: string;
   additional_data_is_root_payload: false;
-}
-
-export interface IDevices extends Paginated {
-  apps: IApp[];
 }

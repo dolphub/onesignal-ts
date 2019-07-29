@@ -8,19 +8,10 @@ import { Client } from '../../lib';
       userAuthKey: process.env.USER_AUTH_KEY,
     });
 
-    // const apps = await client.viewApps();
-    // const app = await client.viewApp();
-
-    const devicesResult = await client.viewDevices();
-    if (devicesResult.data.players.length > 0) {
-      const deviceResult = await client.viewDevice(
-        devicesResult.data.players[0].id,
-      );
-      const { device_os, session_count } = deviceResult.data;
-      // tslint:disable-next-line:no-console
-      console.log(device_os, session_count);
-    }
+    const { data, request } = await client.viewApps();
+    // data.apps[0].apns_certificates;
   } catch (e) {
-    //
+    // tslint:disable-next-line:no-console
+    console.error(e);
   }
 })();
