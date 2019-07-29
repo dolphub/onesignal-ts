@@ -1,5 +1,4 @@
 import { KVStore } from '../../common';
-import { Paginated } from '../../common/requester/interfaces/pagination.interface';
 import { DeviceTypes } from '../enums/device-type.enum';
 
 /**
@@ -27,8 +26,4 @@ export interface Device {
   test_type: string | null;
   ip: string;
   external_user_id: string | null;
-}
-
-export interface Devices extends Paginated {
-  players: Device[];
 }

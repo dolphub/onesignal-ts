@@ -1,6 +1,7 @@
 import * as request from 'request';
-import * as urlJoin from 'url-join';
 import { API_ROOT } from '../constants/api.constants';
+// tslint:disable-next-line:no-var-requires
+const urlJoin = require('url-join');
 
 interface BodyOptions {
   [key: string]: any;

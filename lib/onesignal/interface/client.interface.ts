@@ -2,7 +2,7 @@ import { Paginated, Result } from '../../common';
 import { App } from './app.interface';
 import { CreateNotificationOptions } from './create-notification-options.interface';
 import { NotificationCreatedResponse } from './create-notification-response.interface';
-import { Device, Devices } from './device.interface';
+import { Device } from './device.interface';
 import { IncreaseSessionLengthOptions } from './increase-session-length-options.interface';
 import { ViewNotificationResult } from './view-notification.interface';
 
@@ -22,12 +22,14 @@ export interface IClient {
   // createApp(): Promise<Result<App>>;
   viewDevice(playerId: string): Promise<Result<Device>>;
   viewDevices(): Promise<Result<Paginated<Device[], 'devices'>>>;
-  newSession(playerId: string): Result<ApiResult>;
+  newSession(playerId: string): Promise<Result<ApiResult>>;
   increaseSessionLength(
     options: IncreaseSessionLengthOptions,
   ): Promise<ApiResult>;
-  viewNotification(notificationId: string): Result<ViewNotificationResult>;
+  viewNotification(
+    notificationId: string,
+  ): Promise<Result<ViewNotificationResult>>;
   createNotification(
     options: CreateNotificationOptions,
-  ): Result<NotificationCreatedResponse>;
+  ): Promise<Result<NotificationCreatedResponse>>;
 }
