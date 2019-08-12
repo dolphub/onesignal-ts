@@ -90,13 +90,19 @@ export class Client implements IClient {
   }
 
   public async newSession(playerId: string): Promise<Result<ApiResult>> {
-    throw new Error('Method not implemented.');
+    const uri = this.buildUriWithApp(API_PATHS.devices, [
+      playerId,
+      'on_session',
+    ]);
+    return uri;
   }
+
   public async increaseSessionLength(
     options: IncreaseSessionLengthOptions,
   ): Promise<ApiResult> {
     throw new Error('Method not implemented.');
   }
+
   public async viewNotification(
     notificationId: string,
   ): Promise<Result<ViewNotificationResult>> {
